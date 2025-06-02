@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import signInLottie from '../../assets/lottie/signIn.json';
 import Lottie from 'lottie-react';
+import SocialLogin from '../Shared/SocialLogin';
 
 const SignIn = () => {
 
-    const { signIn } = useContext(AuthContext);
-
+    const { signIn, user } = useContext(AuthContext);
+    console.log(user);
+    
     const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -30,7 +32,7 @@ const SignIn = () => {
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <div className="card-body">
-                        <h1 className="text-5xl my-6 font-bold">Register now!</h1>
+                        <h1 className="text-5xl my-6 font-bold">SignUp now!</h1>
 
                         {/* register form */}
                         <form onSubmit={handleSignIn} className="space-y-4">
@@ -41,8 +43,9 @@ const SignIn = () => {
                             <input type="password" className="input" name='password' placeholder="Password" />
 
                             <div><a className="link link-hover">Forgot password?</a></div>
-                            <button className="btn w-full btn-neutral mt-4">Register</button>
+                            <button className="btn w-full btn-neutral mt-4">SignUp</button>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
