@@ -1,6 +1,7 @@
 import React from 'react';
 import team1 from '../../assets/team/team1.jpg'
 import team2 from '../../assets/team/team2.jpg'
+import { motion } from "motion/react"
 
 const Banner = () => {
     return (
