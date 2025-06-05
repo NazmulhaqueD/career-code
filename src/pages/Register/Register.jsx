@@ -3,25 +3,28 @@ import registerLottie from "../../assets/lottie/register.json";
 import Lottie from 'lottie-react';
 import { AuthContext } from '../../context/AuthContext/AuthContext';
 import SocialLogin from '../Shared/SocialLogin';
+import { Navigate, useNavigate } from 'react-router';
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const handleSignUp = (e)=>{
+    const handleSignUp = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        
+
         // create user with firebase authentication
-        createUser(email,password)
-        .then((result)=>{
-            console.log(result);
-        })
-        .catch(error=>{
-            console.log(error.message)
-        })
+        createUser(email, password)
+            .then((result) => {
+                console.log(result);
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
     }
 
     return (

@@ -31,7 +31,7 @@ const JobCard = ({ job }) => {
                             className="badge badge-outline">{requirement}</div>)
                     }
                 </div>
-                <NavLink to={`/jobs/${_id}`}><button className='btn w-full mt-4 btn-primary'>Apply Now</button></NavLink>
+                <NavLink to={`/jobDetails/${_id}`}><button className='btn w-full mt-4 btn-primary'>Details</button></NavLink>
             </div>
         </div>
     );

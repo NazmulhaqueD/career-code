@@ -8,17 +8,21 @@ const Navbar = () => {
 
     const links = <>
         <NavLink to='/'>Home</NavLink>
-        <li><a>Item 3</a></li>
+        {
+            user && <>
+                <NavLink to='/myApplications'>My Applications</NavLink>
+            </>
+        }
     </>
 
     const handleSignOut = () => {
         logOut()
-        .then(()=>{
-            console.log('logout success')
-        })
-        .catch(error=>{
-            console.log(error.message)
-        })
+            .then(() => {
+                console.log('logout success')
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
     }
 
     return (
@@ -37,7 +41,7 @@ const Navbar = () => {
                 <a className="btn btn-ghost text-xl">daisyUI</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu items-center menu-horizontal px-1">
+                <ul className="menu gap-6 items-center menu-horizontal px-1">
                     {links}
                 </ul>
             </div>
