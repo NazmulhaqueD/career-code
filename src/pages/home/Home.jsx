@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from './Banner';
 import HotJobs from './HotJobs';
 
-const jobPromise = fetch('http://localhost:5000/jobs').then(res => res.json());
 
 const Home = () => {
+    const [jobs, setJobs] = useState(null);
+    useEffect(() => {
+        fetch('http://localhost:5000/jobs')
+            .then(res => res.json())
+            .then(data => {
+                setJobs(data)
+            })
+    }, [jobs])
 
     return (
         <div>
             <Banner></Banner>
-            <HotJobs jobPromise={jobPromise}></HotJobs>
+            <HotJobs jobs={jobs}></HotJobs>
         </div>
     );
 };

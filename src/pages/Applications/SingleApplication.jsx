@@ -1,8 +1,44 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 
-const SingleApplication = ({ application, index }) => {
+const SingleApplication = ({ application, index, myApplications, setMyApplications }) => {
 
-    const { company, company_logo, title } = application;
+    const { company, company_logo, title, _id } = application;
+
+    const handleDeleteApply = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/applications/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.acknowledged) {
+
+                            const filteredApplications = myApplications.filter(application => application._id !== id);
+                            setMyApplications(filteredApplications)
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "Your apply has been deleted",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                        }
+                    })
+            }
+        });
+    }
 
     return (
 
@@ -34,7 +70,7 @@ const SingleApplication = ({ application, index }) => {
             </td>
             <td>Purple</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button onClick={() => handleDeleteApply(_id)} className="btn btn-sm btn-error">Delete</button>
             </th>
         </tr>
     );

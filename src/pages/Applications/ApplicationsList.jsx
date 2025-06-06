@@ -1,13 +1,15 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import SingleApplication from './singleApplication';
 
 const ApplicationsList = ({ myApplicationsPromise }) => {
 
-    const myApplications = use(myApplicationsPromise);
+    const initialApplications = use(myApplicationsPromise);
+    const [myApplications, setMyApplications] = useState(initialApplications)
     console.log(myApplications);
 
     return (
         <div className="overflow-x-auto">
+            <h1 className='text-4xl text-center font-bold my-8'>Your total applications: {myApplications.length}</h1>
             <table className="table">
                 {/* head */}
                 <thead>
@@ -29,6 +31,8 @@ const ApplicationsList = ({ myApplicationsPromise }) => {
                             key={index}
                             index={index}
                             application={application}
+                            myApplications={myApplications}
+                            setMyApplications={setMyApplications}
                         ></SingleApplication>)
                     }
                 </tbody>
